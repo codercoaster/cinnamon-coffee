@@ -1,0 +1,855 @@
+/* ==========================================================================
+   Cinnamon Coffee — paleta tomada del cartel: gris piedra, rosa canela, crema
+   ========================================================================== */
+
+:root {
+  --cream: #fbf6f1;
+  --paper: #f4ebe3;
+  --blush: #e7b7a4;
+  --blush-soft: #f3d9cd;
+  --rose: #c99a93;
+  --rose-ink: #8e5450; /* rosa con contraste AA sobre crema */
+  --stone: #8a847e;
+  --stone-ink: #5e5853;
+  --espresso: #2f2420;
+
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Curvas: ease-out fuerte para entradas, ease-in-out para movimiento en pantalla */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  /* Duraciones: misma escala que T.dur en js/main.js */
+  --dur-press: 160ms;
+  --dur-ui: 250ms;
+  --dur-slow: 500ms;
+
+  --radius: 22px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --max: 1200px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  /* nada debe permitir scroll horizontal (en mobile body solo no alcanza) */
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+body {
+  margin: 0;
+  cursor: default;
+  background: var(--cream);
+  color: var(--espresso);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 0;
+  font-variation-settings: "SOFT" 100;
+}
+
+h1 em,
+h2 em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--rose-ink);
+}
+
+p {
+  margin: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--rose-ink);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.skip {
+  position: absolute;
+  left: 16px;
+  top: -60px;
+  z-index: 100;
+  background: var(--espresso);
+  color: var(--cream);
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+.skip:focus {
+  top: 16px;
+}
+
+.eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--stone-ink);
+  margin-bottom: 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.eyebrow::before {
+  content: "";
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--blush);
+}
+
+/* Buttons ---------------------------------------------------------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--espresso);
+  color: var(--cream);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform var(--dur-press) var(--ease-out),
+    background-color var(--dur-ui) ease;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--espresso);
+  box-shadow: inset 0 0 0 1.5px rgba(47, 36, 32, 0.22);
+}
+.btn--small {
+  min-height: 40px;
+  padding: 0 18px;
+  font-size: 14px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: #4a3a34;
+  }
+  .btn--ghost:hover {
+    background: var(--paper);
+  }
+}
+
+/* Nav -------------------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition:
+    background-color var(--dur-ui) ease,
+    box-shadow var(--dur-ui) ease;
+}
+.nav.is-scrolled {
+  background: rgba(251, 246, 241, 0.82);
+  backdrop-filter: blur(14px) saturate(1.4);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  box-shadow: 0 1px 0 rgba(47, 36, 32, 0.08);
+}
+.nav__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 14px var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.nav__brand img {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.nav__brand:hover img,
+.nav__brand:focus-visible img {
+  transform: scale(1.12);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav__brand img {
+    transition: none;
+  }
+  .nav__brand:hover img,
+  .nav__brand:focus-visible img {
+    transform: none;
+  }
+}
+.nav__brand em {
+  font-weight: 400;
+  color: var(--rose-ink);
+}
+.nav__links {
+  display: flex;
+  gap: 28px;
+  margin-left: auto;
+}
+.nav__links a {
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--stone-ink);
+  position: relative;
+  transition: color var(--dur-ui) ease;
+}
+.nav__links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 1.5px;
+  background: var(--rose);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--dur-ui) var(--ease-out);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav__links a:hover {
+    color: var(--espresso);
+  }
+  .nav__links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Hero ------------------------------------------------------------------- */
+
+.hero {
+  max-width: var(--max);
+  margin: 0 auto;
+  /* el anillo que gira ensancha su caja al rotar; que no desborde la página */
+  overflow-x: clip;
+  padding: clamp(24px, 5vw, 64px) var(--gutter) clamp(56px, 8vw, 104px);
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: clamp(32px, 6vw, 80px);
+}
+.hero__title {
+  font-size: clamp(46px, 7.4vw, 96px);
+  font-weight: 450;
+  margin-bottom: 26px;
+}
+.hero__title .word {
+  display: inline-block;
+  white-space: pre;
+}
+.hero__ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 36px;
+}
+
+.hero__media {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  justify-self: center;
+}
+/* La taza: foto circular (como vista desde arriba), anillo de texto que gira
+   y vapor que sube desde el centro del café. */
+.hero__cup {
+  position: relative;
+  aspect-ratio: 1;
+}
+.hero__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  animation: ring-spin 60s linear infinite;
+}
+.hero__ring text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  fill: var(--stone-ink);
+}
+@keyframes ring-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Capas: el plato y la taza se mueven por separado (profundidad).
+   Medidas calculadas para que el cuerpo de la taza caiga justo en el aro
+   central del plato (≈ 50% / 49% del contenedor). */
+.layer {
+  position: absolute;
+  inset: 0;
+}
+.plate {
+  position: absolute;
+  left: 8%;
+  top: 9.53%;
+  width: 84%;
+  height: auto;
+  filter: drop-shadow(0 28px 34px rgba(70, 44, 34, 0.22)) drop-shadow(0 2px 3px rgba(70, 44, 34, 0.12));
+}
+/* Sombra del cuerpo de la taza: círculo del tamaño del cuerpo, centrado en
+   el aro del plato (50% / 49%). Cuando la taza "se apoya", se cierra. */
+.cup-shadow {
+  position: absolute;
+  left: 20.8%;
+  top: 19.8%;
+  width: 58.4%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  /* disco relleno y difuminado (no box-shadow: se recorta dentro del círculo
+     y dejaba una medialuna clara con borde duro bajo la taza) */
+  background: rgba(70, 44, 34, 0.3);
+  filter: blur(16px);
+  translate: 0 18px;
+}
+.cup-turn {
+  position: absolute;
+  left: 20.71%;
+  top: 19.54%;
+  width: 69.9%;
+  /* gira sobre el centro del cuerpo de la taza, no sobre el del PNG (que incluye el asa) */
+  transform-origin: 41.9% 50%;
+}
+.cup-lift {
+  transform-origin: 41.9% 50%;
+}
+.cup {
+  width: 100%;
+  height: auto;
+  transform-origin: 41.9% 50%;
+  /* solo una sombra de contacto fina; la sombra grande es .cup-shadow */
+  filter: drop-shadow(0 3px 4px rgba(70, 44, 34, 0.18));
+}
+@media (hover: hover) and (pointer: fine) {
+  .cup-lift {
+    cursor: pointer;
+  }
+}
+
+
+/* La barra (café) ---------------------------------------------------------- */
+
+.barra {
+  background: var(--espresso);
+  color: var(--cream);
+  padding: clamp(72px, 10vw, 128px) var(--gutter);
+}
+/* Al saltar por ancla, compensar el padding superior de la sección para que
+   el eyebrow quede justo debajo del nav sticky (~72px) con un respiro de 24px. */
+#menu,
+#visitanos {
+  scroll-margin-top: calc(72px + 24px - clamp(72px, 10vw, 128px));
+}
+.barra__grid {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+.barra__img {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: 999px 999px var(--radius) var(--radius);
+  overflow: hidden;
+}
+.barra__img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.barra h2 {
+  font-size: clamp(38px, 5.4vw, 64px);
+  margin-bottom: 18px;
+}
+.barra h2 em {
+  color: var(--blush);
+}
+.eyebrow--light {
+  color: var(--blush);
+}
+.barra__lead {
+  color: rgba(251, 246, 241, 0.75);
+  font-size: 18px;
+  max-width: 50ch;
+  margin-bottom: 36px;
+}
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+}
+.menu li {
+  display: grid;
+  gap: 2px;
+  padding: 16px 0;
+  border-top: 1px solid rgba(231, 183, 164, 0.22);
+}
+.menu__name {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+}
+.menu__desc {
+  font-size: 15px;
+  color: rgba(251, 246, 241, 0.68);
+}
+
+/* Franja ------------------------------------------------------------------ */
+
+.sr-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+.marquee {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 0;
+  background: var(--blush-soft);
+  color: var(--espresso);
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee 120s linear infinite;
+}
+.marquee__row {
+  display: flex;
+  align-items: center;
+}
+.mq__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(19px, 2vw, 24px);
+  white-space: nowrap;
+}
+.mq__sep {
+  padding: 0 28px;
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2vw, 24px);
+  color: var(--rose-ink);
+}
+.mq__icon {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  fill: none;
+  stroke: var(--rose-ink);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.mq__icon .f {
+  fill: var(--rose-ink);
+  stroke: none;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Sections --------------------------------------------------------------- */
+
+.section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: clamp(72px, 10vw, 128px) var(--gutter);
+}
+.section__head {
+  max-width: 640px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+.section h2 {
+  font-size: clamp(38px, 5.4vw, 64px);
+  margin-bottom: 18px;
+}
+.section__lead {
+  color: var(--stone-ink);
+  font-size: 18px;
+  max-width: 52ch;
+}
+
+/* Visita */
+.visit__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px;
+  border-radius: var(--radius);
+  background: var(--paper);
+  text-decoration: none;
+  min-height: 240px;
+  transition:
+    transform var(--dur-ui) var(--ease-out),
+    background-color var(--dur-ui) ease;
+}
+a.card:active {
+  transform: scale(0.985);
+}
+.card__icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--blush);
+  display: grid;
+  place-items: center;
+  flex: none;
+}
+.card__icon svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: var(--espresso);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.card__kicker {
+  margin-top: 40px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--stone-ink);
+}
+.card__title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.15;
+  font-weight: 500;
+}
+.card__note {
+  font-size: 14px;
+  color: var(--stone-ink);
+}
+.card__link {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--rose-ink);
+  /* empuja el link al fondo: queda alineado en todas las tarjetas */
+  margin-top: auto;
+  padding-top: 18px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    background: var(--blush-soft);
+    transform: translateY(-3px);
+  }
+}
+
+.visit__map {
+  margin-top: 16px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--paper);
+  height: clamp(300px, 42vw, 440px);
+}
+.visit__map iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  /* tono cálido para que el mapa no desentone con la paleta */
+  filter: grayscale(0.35) sepia(0.12);
+}
+
+/* Footer */
+.footer {
+  background: var(--stone);
+  color: var(--cream);
+  border-top: 4px solid var(--blush);
+}
+.footer__inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 64px var(--gutter);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 16px;
+}
+.footer__logo {
+  border-radius: 50%;
+}
+.footer__meta {
+  font-size: 14px;
+  opacity: 0.85;
+}
+
+/* Estados iniciales para Motion (solo con JS + sin reduced motion) -------- */
+
+.motion-ready [data-hero],
+.motion-ready [data-reveal],
+.motion-ready [data-stagger] > *,
+.motion-ready #plate,
+.motion-ready #cup,
+.motion-ready #cupShadow,
+.motion-ready .hero__ring,
+.motion-ready [data-split] {
+  opacity: 0;
+}
+
+/* Responsive ------------------------------------------------------------- */
+
+@media (max-width: 1000px) {
+  .visit__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .nav__links {
+    display: none;
+  }
+  .nav__actions {
+    margin-left: auto;
+  }
+  /* Primera pantalla = nav + hero, exacto, en cualquier celu.
+     svh = alto con las barras del navegador visibles, así no "salta" al scrollear.
+     El texto mantiene su tamaño y la taza se adapta al espacio que sobra. */
+  :root {
+    --nav-h: 68px;
+  }
+  .nav__inner {
+    height: var(--nav-h);
+    padding-block: 0;
+  }
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    height: calc(100vh - var(--nav-h));
+    height: calc(100svh - var(--nav-h));
+    min-height: 480px;
+    padding-top: clamp(12px, 3svh, 32px);
+    padding-bottom: clamp(16px, 3.5svh, 40px);
+  }
+  /* los hijos del bloque de texto pasan a ser hermanos de la taza,
+     así la taza puede ir entre el título y la bajada */
+  .hero__copy {
+    display: contents;
+  }
+  .hero__copy .eyebrow {
+    order: 1;
+    align-self: center;
+    text-align: center;
+    white-space: nowrap;
+    letter-spacing: 0.1em;
+    font-size: min(13px, calc((100vw - 2 * var(--gutter)) / 25));
+  }
+  .hero__copy .eyebrow::before {
+    display: none;
+  }
+  .hero__title {
+    order: 2;
+    margin-bottom: clamp(16px, 3.5svh, 32px);
+    text-align: center;
+  }
+  /* "café de especialidad." en una sola línea, escalada al ancho disponible */
+  .hero__title em {
+    display: block;
+    white-space: nowrap;
+    font-size: min(1em, calc((100vw - 2 * var(--gutter)) / 9.6));
+  }
+  .hero__media {
+    order: 3;
+    /* ocupa todo el alto restante; la taza es un cuadrado que entra
+       tanto a lo ancho como a lo alto de este espacio */
+    flex: 1 1 0;
+    min-height: 0;
+    width: 100%;
+    max-width: 460px;
+    align-self: center;
+    margin: 0 auto;
+    container-type: size;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero__cup {
+    width: min(100cqw, 100cqh);
+    flex: none;
+  }
+  /* en mobile el menú está justo debajo: el botón sobra */
+  .hero__ctas {
+    display: none;
+  }
+  .barra__grid {
+    grid-template-columns: 1fr;
+  }
+  .barra__img {
+    max-width: 420px;
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+  }
+  .visit__grid {
+    grid-template-columns: 1fr;
+  }
+  /* tarjetas compactas en fila: ícono | texto | flecha */
+  .visit__grid {
+    gap: 10px;
+    /* todas las tarjetas con la misma altura (la de la más alta) */
+    grid-auto-rows: 1fr;
+  }
+  .card {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 40px 1fr auto;
+    align-items: center;
+    column-gap: 14px;
+    row-gap: 2px;
+    padding: 14px 18px 14px 14px;
+    border-radius: 18px;
+  }
+  .card__icon {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: 40px;
+    height: 40px;
+  }
+  .card__icon svg {
+    width: 19px;
+    height: 19px;
+  }
+  .card__kicker,
+  .card__title,
+  .card__note {
+    grid-column: 2;
+    min-width: 0;
+  }
+  .card__kicker {
+    margin-top: 0;
+    font-size: 11px;
+  }
+  .card__title {
+    font-size: 19px;
+  }
+  .card__note {
+    font-size: 13px;
+    line-height: 1.35;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  /* el texto del link se reemplaza por una flecha a la derecha */
+  .card__link {
+    display: none;
+  }
+  a.card::after {
+    content: "→";
+    grid-column: 3;
+    grid-row: 1 / span 3;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--rose-ink);
+  }
+}
+
+@media (max-width: 560px) {
+  body {
+    font-size: 16px;
+  }
+  .nav__brand span {
+    display: none;
+  }
+  .menu {
+    grid-template-columns: 1fr;
+  }
+  .hero__ring text {
+    font-size: 15px;
+  }
+  /* "Hecho por CoderCoaster" en su propia línea */
+  .footer__sep {
+    display: none;
+  }
+  .footer__credit {
+    display: block;
+    margin-top: 4px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .marquee__track,
+  .hero__ring {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}

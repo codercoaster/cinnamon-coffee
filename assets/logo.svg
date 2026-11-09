@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="Cinnamon Coffee">
+  <defs>
+    <path id="top" d="M 34 100 A 66 66 0 0 1 166 100" />
+    <path id="bottom" d="M 26 100 A 74 74 0 0 0 174 100" />
+  </defs>
+  <circle cx="100" cy="100" r="96" fill="#8A847E" />
+  <circle cx="100" cy="100" r="90" fill="#FBF6F1" />
+  <circle cx="100" cy="100" r="84" fill="none" stroke="#E7B7A4" stroke-width="5" />
+  <path d="M 16 100 A 84 84 0 0 0 184 100 Z" fill="#8A847E" />
+  <circle cx="100" cy="100" r="50" fill="#FBF6F1" stroke="#8A847E" stroke-width="5" />
+  <text font-family="Georgia, serif" font-size="21" font-weight="700" letter-spacing="3" fill="#8A847E">
+    <textPath href="#top" startOffset="50%" text-anchor="middle">CINNAMON</textPath>
+  </text>
+  <text font-family="Georgia, serif" font-size="15" font-weight="700" letter-spacing="3" fill="#FBF6F1">
+    <textPath href="#bottom" startOffset="50%" text-anchor="middle">COFFEE</textPath>
+  </text>
+  <g fill="none" stroke="#C99A93" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 78 104 h 38 v 6 a 19 19 0 0 1 -38 0 z" />
+    <path d="M 116 108 a 7 7 0 0 1 0 14" />
+    <path d="M 72 132 h 50" />
+    <path d="M 95 98 c -8 -8 8 -12 0 -22 c -6 -7 4 -10 2 -16" />
+  </g>
+</svg>
