@@ -2,7 +2,7 @@
 
 ### Cinnamon Coffee
 
-Disponible en [codercoaster.github.io/cinnamon-coffee](https://codercoaster.github.io/cinnamon-coffee/) Diseñado y desarrollado por [CoderCoaster](https://codercoaster.com/?utm_source=github&utm_medium=readme&utm_campaign=cinnamon-coffee).
+Disponible en [www.cinnamonconfi.com](https://www.cinnamonconfi.com/?utm_source=github&utm_medium=readme) Diseñado y desarrollado por [CoderCoaster](https://codercoaster.com/?utm_source=github&utm_medium=readme&utm_campaign=cinnamon-coffee).
 
 [![](https://raw.githubusercontent.com/codercoaster/codercoaster/main/assets/divider.svg)](https://raw.githubusercontent.com/codercoaster/codercoaster/main/assets/divider.svg)
 
