@@ -165,6 +165,49 @@ function heroInteraction() {
       animate(lift, { scale: 1, y: 0 }, T.follow);
       animate(shadow, { scale: 1, opacity: 1 }, T.follow);
     });
+  } else {
+    // Táctil: no hay hover, así que el scroll hace de mano. Mientras la página
+    // se mueve, la taza se levanta (el mismo gesto del hover) y las capas se
+    // quedan un poco atrás por inercia; al frenar, vuelve a apoyarse.
+    const layers = $$("[data-depth]");
+    let lastY = scrollY;
+    let lastT = performance.now();
+    let frame = 0;
+    let idle = 0;
+    let lifted = false;
+    let visible = true;
+    new IntersectionObserver(([e]) => (visible = e.isIntersecting)).observe(media);
+
+    const settle = () => {
+      lifted = false;
+      animate(lift, { scale: 1, y: 0 }, T.follow);
+      animate(shadow, { scale: 1, opacity: 1 }, T.follow);
+      layers.forEach((l) => animate(l, { y: 0 }, T.follow));
+    };
+
+    addEventListener(
+      "scroll",
+      () => {
+        if (!visible) return;
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(() => {
+          const now = performance.now();
+          const v = (scrollY - lastY) / Math.max(16, now - lastT); // px/ms
+          lastY = scrollY;
+          lastT = now;
+          const n = Math.max(-1, Math.min(1, v / 1.5));
+          if (!lifted) {
+            lifted = true;
+            animate(lift, { scale: 1.03, y: -3 }, T.follow);
+            animate(shadow, { scale: 1.05, opacity: 0.7 }, T.follow);
+          }
+          layers.forEach((l) => animate(l, { y: n * +l.dataset.depth }, T.follow));
+          clearTimeout(idle);
+          idle = setTimeout(settle, 140);
+        });
+      },
+      { passive: true },
+    );
   }
 
   // Click / tap: girás la taza sobre el plato.
