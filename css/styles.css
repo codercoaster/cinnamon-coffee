@@ -1,14 +1,15 @@
 /* ==========================================================================
-   Cinnamon Coffee — paleta tomada del cartel: gris piedra, rosa canela, crema
+   Cinnamon Coffee — paleta tomada del cartel: gris piedra, amarillo dorado, crema
    ========================================================================== */
 
 :root {
   --cream: #fbf6f1;
   --paper: #f4ebe3;
-  --blush: #e7b7a4;
-  --blush-soft: #f3d9cd;
-  --rose: #c99a93;
-  --rose-ink: #8e5450; /* rosa con contraste AA sobre crema */
+  --blush: #f0c27f; /* amarillo dorado del cartel */
+  --blush-soft: #f8e6c6;
+  --rose: #dba65c;
+  --rose-ink: #8c5e1a; /* ocre: el dorado con contraste AA sobre crema */
+  --gold-display: #b88236; /* dorado más claro para titulares grandes (AA texto grande, 3.1:1) */
   --stone: #8a847e;
   --stone-ink: #5e5853;
   --espresso: #2f2420;
@@ -80,7 +81,7 @@ h1 em,
 h2 em {
   font-style: italic;
   font-weight: 400;
-  color: var(--rose-ink);
+  color: var(--gold-display);
 }
 
 p {
@@ -439,9 +440,10 @@ p {
 }
 .menu li {
   display: grid;
+  align-content: start;
   gap: 2px;
   padding: 16px 0;
-  border-top: 1px solid rgba(231, 183, 164, 0.22);
+  border-top: 1px solid rgba(240, 194, 127, 0.22);
 }
 .menu__name {
   font-family: var(--font-display);
@@ -451,6 +453,59 @@ p {
 .menu__desc {
   font-size: 15px;
   color: rgba(251, 246, 241, 0.68);
+}
+.menu__temps {
+  display: inline-flex;
+  gap: 4px;
+  margin-left: 10px;
+  vertical-align: -2px;
+}
+.menu__temp {
+  position: relative;
+  display: inline-flex;
+  color: var(--blush);
+  cursor: help;
+  outline: none;
+}
+.menu__temp svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.menu__temp::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translate(-50%, 4px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--espresso);
+  font-family: var(--font-body, inherit);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 2;
+}
+.menu__temp:hover::after,
+.menu__temp:focus::after {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.menu__note {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(240, 194, 127, 0.22);
+  font-size: 14px;
+  color: rgba(251, 246, 241, 0.6);
 }
 
 /* Franja ------------------------------------------------------------------ */
