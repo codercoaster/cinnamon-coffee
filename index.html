@@ -3,23 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Cinnamon Coffee · Cafetería y pastelería en Buenos Aires</title>
+    <title>Cinnamon Coffee (Cinnamon Confi) · Cafetería de especialidad en Liniers, frente a Vélez</title>
     <meta
       name="description"
-      content="Cinnamon Coffee: cafetería porteña de café de especialidad con arte latte, pastelería de vitrina y medialunas en Buenos Aires."
+      content="Cinnamon Coffee: café de especialidad, medialunas y pastelería en Liniers, frente a la cancha de Vélez. Av. Álvarez Jonte 6591. Lunes a sábado de 7 a 20 hs."
     />
     <meta name="theme-color" content="#FBF6F1" />
+    <link rel="canonical" href="https://cinnamonconfi.com/" />
 
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Cinnamon Café · Cafetería y confitería" />
+    <meta property="og:site_name" content="Cinnamon Coffee" />
+    <meta property="og:url" content="https://cinnamonconfi.com/" />
+    <meta property="og:title" content="Cinnamon Coffee (Cinnamon Confi) · Cafetería en Liniers" />
     <meta
       property="og:description"
-      content="Cafetería porteña de especialidad, en el barrio de Liniers."
+      content="Café de especialidad, medialunas y pastelería en Liniers, frente a la cancha de Vélez."
     />
-    <meta property="og:image" content="assets/img/hero-latte.webp" />
+    <meta property="og:image" content="https://cinnamonconfi.com/assets/img/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Café con arte latte en Cinnamon Coffee, Liniers" />
     <meta property="og:locale" content="es_AR" />
 
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Cinnamon Coffee (Cinnamon Confi) · Cafetería en Liniers" />
+    <meta name="twitter:description" content="Café de especialidad, medialunas y pastelería en Liniers, frente a la cancha de Vélez." />
+    <meta name="twitter:image" content="https://cinnamonconfi.com/assets/img/og.jpg" />
+
     <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/favicon-48.png" type="image/png" sizes="48x48" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
     <link rel="preload" as="image" href="assets/img/taza.webp" fetchpriority="high" />
     <link rel="preload" as="image" href="assets/img/plato.webp" />
@@ -49,7 +62,16 @@
       {
         "@context": "https://schema.org",
         "@type": "CafeOrCoffeeShop",
+        "@id": "https://cinnamonconfi.com/#cafe",
         "name": "Cinnamon Coffee",
+        "alternateName": ["Cinnamon Confi", "Cinnamon Confitería", "Cinnamon Café", "Cinnamon Cafe"],
+        "description": "Cafetería de especialidad en Liniers, frente a la cancha de Vélez Sarsfield.",
+        "url": "https://cinnamonconfi.com/",
+        "image": "https://cinnamonconfi.com/assets/img/og.jpg",
+        "logo": "https://cinnamonconfi.com/assets/apple-touch-icon.png",
+        "menu": "https://cinnamonconfi.com/#menu",
+        "priceRange": "$",
+        "areaServed": "Liniers, Buenos Aires",
         "servesCuisine": ["Café", "Pastelería"],
         "telephone": "+54 9 11 6856-5787",
         "address": {
@@ -57,6 +79,7 @@
           "streetAddress": "Av. Álvarez Jonte 6591",
           "postalCode": "C1408",
           "addressLocality": "Ciudad Autónoma de Buenos Aires",
+          "addressRegion": "CABA",
           "addressCountry": "AR"
         },
         "geo": { "@type": "GeoCoordinates", "latitude": -34.6355817, "longitude": -58.5228892 },
@@ -72,13 +95,24 @@
         "sameAs": ["https://www.instagram.com/cinnamon.confi/"]
       }
     </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://cinnamonconfi.com/#website",
+        "name": "Cinnamon Coffee",
+        "alternateName": ["Cinnamon Confitería", "Cinnamon Confi", "Cinnamon Café"],
+        "url": "https://cinnamonconfi.com/",
+        "publisher": { "@id": "https://cinnamonconfi.com/#cafe" }
+      }
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Saltar al contenido</a>
 
     <header class="nav" id="nav">
       <div class="nav__inner">
-        <a class="nav__brand" href="./"aria-label="Cinnamon Coffee, inicio">
+        <a class="nav__brand" href="./" aria-label="Cinnamon Coffee, inicio">
           <img src="assets/logo.svg" alt="" width="40" height="40" />
           <span>Cinnamon <em>Coffee</em></span>
         </a>
@@ -263,7 +297,7 @@
         <div class="visit__map" data-reveal>
           <iframe
             src="https://www.google.com/maps?q=Cinnamon+coffee,+Av.+%C3%81lvarez+Jonte+6591,+C1408+Buenos+Aires&z=16&output=embed"
-            title="Mapa: Cinnamon Coffee, Av. Álvarez Jonte 6591, Buenos Aires"
+            title="Mapa: Cinnamon Coffee, Av. Álvarez Jonte 6591, Liniers, Buenos Aires"
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
             allowfullscreen
